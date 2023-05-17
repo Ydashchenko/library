@@ -4,17 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your anime/manga list</title>
+    <title>Your anime/manga/book list</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
 <body>
     <header>
-        <h1>Welcome to your own anime/manga list, dear</h1>
+        <h1>Welcome to your own anime/manga/book list, dear</h1>
     </header>
     <main>
-        <button>Add a title</button>
-        <div id="content"></div>
+        <div id="add-buttons">
+            <button>Add an anime</button>
+            <button>Add a manga</button>
+            <button>Add a book</button>
+        </div>
+        <div id="content">
+            <table id="anime-table">
+                <caption>Anime</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Episodes</th>
+                        <th>Release Year</th>
+                        <th>Watched</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+            <table id="manga-table">
+                <caption>Manga</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Pages</th>
+                        <th>Release Year</th>
+                        <th>Read</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+            <table id="book-table">
+                <caption>Books</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Pages</th>
+                        <th>Release Year</th>
+                        <th>Read</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
     </main>
     <footer>
         Copyright ©
