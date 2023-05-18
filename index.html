@@ -14,10 +14,37 @@
     </header>
     <main>
         <div id="add-buttons">
-            <button>+ Add an anime</button>
-            <button>+ Add a manga</button>
-            <button>+ Add a book</button>
+            <button id="add-anime">+ Add an anime</button>
+            <button id="add-manga">+ Add a manga</button>
+            <button id="add-book">+ Add a book</button>
         </div>
+        <form action="">
+            <div>
+                <label for="">Name</label>
+                <input type="text">
+            </div>
+            <div>
+                <label for="">Author</label>
+                <input type="text">
+            </div>
+            <div>
+                <label for="">Pages</label>
+                <input type="number">
+            </div>
+            <div>
+                <label for="">Release Date</label>
+                <input type="date">
+            </div>
+            <div>
+                <label for="" id="seen">Watched</label>
+                <div>
+                    <input type="radio" name="seen">
+                    <label for="">Yes</label>
+                    <input type="radio" name="seen">
+                    <label for="">No</label>
+                </div>
+            </div>
+        </form>
         <div id="content">
             <table id="anime-table">
                 <caption>Anime</caption>

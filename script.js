@@ -1,18 +1,32 @@
-function Book(title, author, pages, read) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-    let readStr
-    if (this.read === true) {
-        readStr = 'read already'
-    } else {
-        readStr = 'not read yet'
-    }
-    this.info = function() {
-        return `${title} by ${author}, ${pages} pages, ${readStr}.`
-    }
+let myBookLibrary = [];
+let myAnimeLibrary = [];
+let myMangaLibrary = [];
+
+function Book() {
+  // the constructor...
 }
 
-const book1 = new Book('The Penis', 'Kar Ass', 69, true)
-console.log(book1.info())
+function Anime() {
+    // the constructor...
+}
+
+function Manga() {
+    // the constructor...
+}
+
+function addBook() {
+  // do stuff here
+}
+  
+function addAnime() {
+    // do stuff here
+}
+  
+function addManga() {
+    // do stuff here
+}
+
+const addAnimeBtn = document.getElementById('add-anime')
+addAnimeBtn.addEventListener('click', function(e) {
+    
+})
