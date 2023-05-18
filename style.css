@@ -30,6 +30,13 @@ footer img {
 }
 
  #add-buttons {
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+ }
+
+ button {
+    font-size: 30px;
+    margin: 20px 5px;
+    padding: 10px 0;
  }
