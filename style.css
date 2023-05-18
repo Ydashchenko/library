@@ -32,12 +32,12 @@ footer img {
  #add-buttons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
+    padding: 20px;
+    gap: 5px;
  }
 
- button {
+ #add-buttons button {
     font-size: 30px;
-    margin: 20px 5px;
     padding: 10px 0;
  }
 
@@ -55,7 +55,7 @@ footer img {
 
 tr {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
 }
 
@@ -66,4 +66,36 @@ thead tr th{
 a {
     color: black;
     text-decoration: none;
+}
+
+form {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    align-items: center;
+}
+
+::placeholder, input, form, form button {
+    font-size: 20px;
+}
+
+form button {
+    height: 30px;
+}
+
+input {
+    height: 30px;
+    padding-left: 10px;
+}
+
+.seen {
+    display: flex;
+    justify-self: center;
+    gap: 20px;
+}
+
+.checkmark {
+    height: 30px;
+    width: 30px;
 }
