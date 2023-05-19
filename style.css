@@ -96,7 +96,7 @@ input {
     gap: 20px;
 }
 
-.checkmark {
+#checkmark {
     height: 30px;
     width: 30px;
 }

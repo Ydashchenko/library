@@ -20,13 +20,13 @@
         </div>
         <form action="">
             <input id="title" class="input-area" type="text" placeholder="" required>
-            <input class="input-area" type="text" placeholder="Author">
+            <input id="author" class="input-area" type="text" placeholder="Author">
             <input id="number" class="input-area" type="number" placeholder="">
             <div class="seen">
                 <label id="pages-episodes" class="input-label" for=""></label>
-                <input class="checkmark" type="checkbox">
+                <input id="checkmark" type="checkbox">
             </div>
-            <button type="submit">Add</button>
+            <button id="submit" type="submit">Add</button>
         </form>
         <div id="content">
             <table id="anime-table">
@@ -40,9 +40,7 @@
                         <th>Delete</th>
                     </tr>
                 </thead>
-                <tbody>
-
-                </tbody>
+                <tbody id="anime-content"></tbody>
             </table>
 
             <table id="manga-table">
@@ -56,9 +54,7 @@
                         <th>Delete</th>
                     </tr>
                 </thead>
-                <tbody>
-
-                </tbody>
+                <tbody id="manga-content"></tbody>
             </table>
 
             <table id="book-table">
@@ -72,9 +68,7 @@
                         <th>Delete</th>
                     </tr>
                 </thead>
-                <tbody>
-
-                </tbody>
+                <tbody id="book-content"></tbody>
             </table>
         </div>
     </main>
