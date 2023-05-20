@@ -14,7 +14,25 @@ function Content(title, author, number, seen) {
     this.author = author
     this.number = number
     this.seen = seen
-    
+}
+
+Content.prototype.toggleSeen = function() {
+    this.seen = !this.seen
+}
+
+function toggleSeenAnime(index) {
+    myAnimeLibrary[index].toggleSeen()
+    addToAnimeTable()
+}
+
+function toggleSeenManga(index) {
+    myMangaLibrary[index].toggleSeen()
+    addToMangaTable()
+}
+
+function toggleSeenBook(index) {
+    myBookLibrary[index].toggleSeen()
+    addToBookTable()
 }
 
 function addContent() {
@@ -74,7 +92,9 @@ function addToAnimeTable() {
             <th>${ani.title}</th>
             <td>${ani.author}</td>
             <td>${ani.number}</td>
-            <td>${ani.seen ? 'Yes' : 'No'}</td>
+            <td class='ifSeen'>
+                <button class='toggleBtn' onclick='toggleSeenAnime(${element})'>${ani.seen ? 'Yes' : 'No'}</button>
+            </td>
             <td>
                 <button class='delete-btn' onclick='deleteAnime(${element})'>Delete</button>
             </td>
@@ -93,7 +113,9 @@ function addToMangaTable() {
             <th>${mang.title}</th>
             <td>${mang.author}</td>
             <td>${mang.number}</td>
-            <td>${mang.seen ? 'Yes' : 'No'}</td>
+            <td class='ifSeen'>
+                <button class='toggleBtn' onclick='toggleSeenManga(${element})'>${mang.seen ? 'Yes' : 'No'}</button>
+            </td>
             <td>
                 <button class='delete-btn' onclick='deleteManga(${element})'>Delete</button>
             </td>
@@ -112,8 +134,9 @@ function addToBookTable() {
             <th>${boo.title}</th>
             <td>${boo.author}</td>
             <td>${boo.number}</td>
-            <td>${boo.seen ? 'Yes' : 'No'}</td>
-            <td>
+            <td class='ifSeen'>
+                <button class='toggleBtn' onclick='toggleSeenBook(${element})'>${boo.seen ? 'Yes' : 'No'}</button>
+            </td>
                 <button class='delete-btn' onclick='deleteBook(${element})'>Delete</button>
             </td>
         `
