@@ -9,6 +9,26 @@ const addBookBtn = document.getElementById('add-book')
 const addContentToLibrary = document.getElementById('submit')
 const form = document.querySelector('form')
 
+function Content(title, author, number, seen) {
+    this.title = title
+    this.author = author
+    this.number = number
+    this.seen = seen
+    
+}
+
+function addContent() {
+    if (contentType === 'anime') {
+        myAnimeLibrary.push(new Content(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('number').value, document.getElementById('checkmark').checked))
+    } else if (contentType === 'manga') {
+        myMangaLibrary.push(new Content(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('number').value, document.getElementById('checkmark').checked))
+    } else if (contentType === 'book') {
+        myBookLibrary.push(new Content(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('number').value, document.getElementById('checkmark').checked))
+    }
+    addToTable();
+    form.style.display = 'none'
+}
+
 addAnimeBtn.addEventListener('click', function(e) {
     contentType = 'anime'
     form.style.display = 'grid'
@@ -34,60 +54,30 @@ addBookBtn.addEventListener('click', function(e) {
 })
 
 addContentToLibrary.addEventListener('click', function(e) {
-    if (document.getElementById('title').value === '') {
-        return
-    }
-    let newElement = document.createElement('tr')
-    newElement.id = 'newElement'
-    let thName = document.createElement('th')
-    let tdAuthor = document.createElement('td')
-    let tdNumber = document.createElement('td')
-    let tdSeen = document.createElement('td')
-    let tdDelete = document.createElement('td')
-
-    newElement.appendChild(thName)
-    newElement.appendChild(tdAuthor)
-    newElement.appendChild(tdNumber)
-    newElement.appendChild(tdSeen)
-    newElement.appendChild(tdDelete)
-
-    thName.textContent = document.getElementById('title').value
-    tdAuthor.textContent = document.getElementById('author').value
-    tdNumber.textContent = document.getElementById('number').value
-    let check = document.createElement('input')
-    check.type = 'checkbox'
-    check.checked = document.getElementById('checkmark').checked
-    tdSeen.appendChild(check)
-    const deleteBtn = document.createElement('button')
-    deleteBtn.id = 'delete-btn'
-    deleteBtn.textContent = 'Delete'
-    tdDelete.appendChild(deleteBtn)
-
-    if (contentType == 'anime') {
-        document.getElementById('anime-content').appendChild(newElement)
-    }
+    e.preventDefault();
+    addContent();
 })
 
-function Book() {
-    // the constructor...
+function addToTable() {
+    let animeContent = document.getElementById('anime-content')
+    animeContent.innerHTML = ''
+    for (element in myAnimeLibrary) {
+        let ani = myAnimeLibrary[element]
+        let aniRow = document.createElement('tr')
+        aniRow.innerHTML = `
+            <th>${ani.title}</th>
+            <td>${ani.author}</td>
+            <td>${ani.number}</td>
+            <td>${ani.seen ? 'Yes' : 'No'}</td>
+            <td>
+                <button class='delete-btn' onclick='deleteAnime(${element})'>Delete</button>
+            </td>
+        `
+        animeContent.appendChild(aniRow)
+    }
 }
-  
-  function Anime() {
-      // the constructor...
+
+function deleteAnime(index) {
+    myAnimeLibrary.splice(index, 1)
+    addToTable()
 }
-  
-  function Manga() {
-      // the constructor...
-  }
-  
-  function addBook() {
-    // do stuff here
-  }
-    
-  function addAnime() {
-      // do stuff here
-  }
-    
-  function addManga() {
-      // do stuff here
-  }
