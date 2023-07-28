@@ -1,6 +1,39 @@
-let myBookLibrary = [];
-let myAnimeLibrary = [];
-let myMangaLibrary = [];
+const LOCAL_STORAGE_BOOKS = 'library.myBookLibrary'
+const LOCAL_STORAGE_ANIME = 'library.myAnimeLibrary'
+const LOCAL_STORAGE_MANGA = 'library.myMangaLibrary'
+
+
+// Add this function to convert objects to instances of the appropriate content types
+function convertToAnimeObjects(data) {
+    return Array.isArray(data) ? data.map(item => new Anime(item.title, item.author, item.number, item.seen)) : [];
+}
+
+function convertToMangaObjects(data) {
+    return Array.isArray(data) ? data.map(item => new Manga(item.title, item.author, item.number, item.seen)) : [];
+}
+
+function convertToBookObjects(data) {
+    return Array.isArray(data) ? data.map(item => new Book(item.title, item.author, item.number, item.seen)) : [];
+}
+
+let myBookLibrary = JSON.parse(localStorage.getItem(LOCAL_STORAGE_BOOKS), convertToBookObjects) || [];
+let myAnimeLibrary = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ANIME), convertToAnimeObjects) || [];
+let myMangaLibrary = JSON.parse(localStorage.getItem(LOCAL_STORAGE_MANGA), convertToMangaObjects) || [];
+
+
+addToAnimeTable()
+addToMangaTable()
+addToBookTable()
+
+
+
+
+function saveLibrary() {
+    localStorage.setItem(LOCAL_STORAGE_BOOKS, JSON.stringify(myBookLibrary))
+    localStorage.setItem(LOCAL_STORAGE_ANIME, JSON.stringify(myAnimeLibrary))
+    localStorage.setItem(LOCAL_STORAGE_MANGA, JSON.stringify(myMangaLibrary))
+}
+
 let contentType = ''
 
 const addAnimeBtn = document.getElementById('add-anime')
@@ -8,6 +41,22 @@ const addMangaBtn = document.getElementById('add-manga')
 const addBookBtn = document.getElementById('add-book')
 const addContentToLibrary = document.getElementById('submit')
 const form = document.querySelector('form')
+
+// Constructors for Anime, Manga, and Book content types
+function Anime(title, author, number, seen) {
+    Content.call(this, title, author, number, seen);
+}
+Anime.prototype = Object.create(Content.prototype);
+
+function Manga(title, author, number, seen) {
+    Content.call(this, title, author, number, seen);
+}
+Manga.prototype = Object.create(Content.prototype);
+
+function Book(title, author, number, seen) {
+    Content.call(this, title, author, number, seen);
+}
+Book.prototype = Object.create(Content.prototype);
 
 function Content(title, author, number, seen) {
     this.title = title
@@ -23,30 +72,53 @@ Content.prototype.toggleSeen = function() {
 function toggleSeenAnime(index) {
     myAnimeLibrary[index].toggleSeen()
     addToAnimeTable()
+    saveLibrary();
 }
 
 function toggleSeenManga(index) {
     myMangaLibrary[index].toggleSeen()
     addToMangaTable()
+    saveLibrary();
 }
 
 function toggleSeenBook(index) {
     myBookLibrary[index].toggleSeen()
     addToBookTable()
+    saveLibrary();
 }
 
 function addContent() {
     if (contentType === 'anime') {
-        myAnimeLibrary.push(new Content(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('number').value, document.getElementById('checkmark').checked))
+        myAnimeLibrary.push(new Anime(
+            document.getElementById('title').value,
+            document.getElementById('author').value,
+            document.getElementById('number').value,
+            document.getElementById('checkmark').checked
+        ));
         addToAnimeTable();
+        saveLibrary()
     } else if (contentType === 'manga') {
-        myMangaLibrary.push(new Content(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('number').value, document.getElementById('checkmark').checked))
+        myMangaLibrary.push(new Manga(
+            document.getElementById('title').value,
+            document.getElementById('author').value,
+            document.getElementById('number').value,
+            document.getElementById('checkmark').checked
+        ));
         addToMangaTable();
+        saveLibrary()
     } else if (contentType === 'book') {
-        myBookLibrary.push(new Content(document.getElementById('title').value, document.getElementById('author').value, document.getElementById('number').value, document.getElementById('checkmark').checked))
+        myBookLibrary.push(new Book(
+            document.getElementById('title').value,
+            document.getElementById('author').value,
+            document.getElementById('number').value,
+            document.getElementById('checkmark').checked
+        ));
         addToBookTable();
+        saveLibrary()
     }
-    form.style.display = 'none'
+
+    form.style.display = 'none';
+    saveLibrary();
 }
 
 addAnimeBtn.addEventListener('click', function(e) {
@@ -101,6 +173,7 @@ function addToAnimeTable() {
         `
         animeContent.appendChild(aniRow)
     }
+    console.log(myAnimeLibrary)
 }
 
 function addToMangaTable() {
@@ -122,6 +195,7 @@ function addToMangaTable() {
         `
         mangaContent.appendChild(mangaRow)
     }
+    console.log(myMangaLibrary)
 }
 
 function addToBookTable() {
@@ -142,21 +216,25 @@ function addToBookTable() {
         `
         bookContent.appendChild(bookRow)
     }
+    console.log(myBookLibrary)
 }
 
 
 function deleteAnime(index) {
     myAnimeLibrary.splice(index, 1)
     addToAnimeTable()
+    saveLibrary();
 }
 
 function deleteManga(index) {
     myMangaLibrary.splice(index, 1)
     addToMangaTable()
+    saveLibrary();
 }
 
 function deleteBook(index) {
     myBookLibrary.splice(index, 1)
     addToBookTable()
+    saveLibrary();
 }
 
